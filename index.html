@@ -135,6 +135,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);
 .stage:nth-child(odd) .detail-list li{flex-direction:row-reverse;text-align:right}
 .detail-list li::before{content:'›';color:var(--blue);font-weight:700;flex-shrink:0}
 
+.insight-box{
+  margin-top:12px;padding:10px 14px;border-radius:0 10px 10px 0;
+  background:linear-gradient(135deg,var(--sky) 0%,var(--cream) 100%);
+}
+.insight-label{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);margin-bottom:5px}
+.insight-text{font-size:12px;color:var(--muted);line-height:1.6;font-style:italic}
+
 .stage-center{display:flex;flex-direction:column;align-items:center}
 .s-top,.s-bot{width:3px;flex:1;min-height:18px;background:var(--border);border-radius:3px}
 .s-node{
@@ -378,7 +385,7 @@ footer{
   <div class="section-inner">
     <div class="section-eyebrow">Process Flow</div>
     <div class="section-title">End-to-End <em>Supply Chain</em> Journey</div>
-    <p class="section-sub">Click any stage to expand full details · Upstream → Downstream</p>
+    <p class="section-sub">Click any stage to expand full details · 5-Stage Operational Model · Onboarding → Crisis Management</p>
 
     <div class="flow-wrap" id="flow">
       <div class="flow-spine"></div>
@@ -435,56 +442,83 @@ footer{
 </footer>
 
 <script>
-/* ── FLOW DATA ── */
+/* ── FLOW DATA (5 Stages from SMRTFlow operational model) ── */
 const stages=[
-  {color:"#1a6bdc",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
-   phase:"Upstream",num:"01",title:"Pre-PA Supplier Engagement",
-   desc:"Immediately after sourcing agreement, conduct onsite visit to coach MMOG requirements and assess gap between current vs. expected status.",
-   tags:["MMOG Assessment","Gap Analysis","Cost Negotiation"],
-   kpis:[{v:"Day 0",l:"After sourcing"},{v:"Onsite",l:"First visit"},{v:"MMOG",l:"Standard target"}],
-   details:["Assess gap between current supplier status and MMOG Level A requirements","Engage Purchasing, MFE & Program to capture all MP&L inputs","Support cost negotiations where logistics and readiness are factors"]},
+  {color:"#1a6bdc",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M12 4H4a1 1 0 00-1 1v14a1 1 0 001 1h5"/><path d="M18 4l2 2-6.5 6.5-3 .5.5-3L18 4z"/></svg>`,
+   phase:"Onboarding",num:"01",title:"Pre-PA & Supplier Onboarding",
+   desc:"Immediately after supplier selection is finalized. Establish communication systems and baseline standards — the foundation that every downstream stage depends on.",
+   tags:["MMOG Gap Assessment","Covisint Setup","EDI Connectivity","System Onboarding"],
+   kpis:[{v:"Day 0",l:"Post-selection"},{v:"3 systems",l:"Setup required"},{v:"MMOG",l:"Baseline assessed"}],
+   details:[
+     "Conduct onsite Gap Assessment comparing current supplier status against MMOG requirements",
+     "Setup and onboard supplier into Covisint, SuperG, and eDDL portals",
+     "Establish EDI connectivity for release transmission and ASN receipt",
+     "Coordinate cross-functionally with Purchasing and MFE teams",
+     "Engineer advantage: deep understanding of EDI protocol and system permission management"
+   ],
+   insight:"As a Computer Engineer, you understand EDI data communication protocols and user permission management in enterprise systems better than most — directly applicable when validating connectivity and troubleshooting onboarding issues."
+  },
 
-  {color:"#00a8cc",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`,
+  {color:"#00a8cc",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
    phase:"Pre-Launch",num:"02",title:"Launch Readiness Review (LRR)",
-   desc:"Kicked off 6–8 months before the TT event. Deep-dive assessment across supplier's end-to-end material planning — ERP, MRP/MPS, packaging, logistics, and Tier 2 readiness.",
-   tags:["EDI Setup","MRP/MPS Validation","System Onboarding","Ramp-Up Survey"],
-   kpis:[{v:"6–8 mo",l:"Before launch"},{v:"Tier 1+2",l:"Coverage"},{v:"10+ tools",l:"Ford systems"}],
-   details:["Onboard Supplier into Covisint, FSP, eDDL, SuperG, SIM, GCP, MCPV, NGVAS","Establish EDI connectivity to transmit releases and receive ASNs","Validate ERP system for robust MRP & MPS production planning","Deep-dive Tier 2 ordering process, Logistics VSM, stock maintenance","Run Ramp-Up Survey: RM availability, dunnage, capacity (PPAP), manpower"]},
+   desc:"Initiated 6–8 months before the TT Event. Focus on verifying the supplier's internal planning systems are robust enough to handle production ramp-up demands.",
+   tags:["ERP / MRP Audit","Logistics VSM","Tier 2 Management","Dunnage Readiness"],
+   kpis:[{v:"6–8 mo",l:"Before TT Event"},{v:"MRP/MPS",l:"Validated"},{v:"Weekly",l:"Night Letters"}],
+   details:[
+     "Audit supplier ERP system — validate MRP and MPS production planning logic",
+     "Review Tier 2 supplier ordering process and Logistics Value Stream Mapping",
+     "Issue Weekly Night Letters to report program readiness progress",
+     "Confirm packaging and dunnage readiness across all commodity lines",
+     "Engineer advantage: ability to trace MRP calculation logic and identify planning gaps at the system level"
+   ],
+   insight:"You can analyze the MRP run logic inside a supplier's ERP system to pinpoint flaws in material requirement calculations — a technical depth that non-engineers rarely bring to this audit."
+  },
 
-  {color:"#4d94ff",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
-   phase:"Pre-Launch",num:"03",title:"Localization / RWM / eSRA",
-   desc:"Upon receiving RWM from Purchasing, trigger Resourcing Audit Assessment via SuperG, train suppliers, and develop a time plan to close all gaps before supply begins.",
-   tags:["Resourcing Audit","SuperG Submission","Gap Closure","ASCENT Onboarding"],
-   kpis:[{v:"SuperG",l:"Audit platform"},{v:"100%",l:"Gap closure"},{v:"ASCENT",l:"Commitment"}],
-   details:["Trigger Resourcing Audit Assessment via SuperG upon receiving RWM from Purchasing","Train and coach suppliers through self-assessment submission timeline","Review evidence submitted and develop gap-closure time plan","Onboard suppliers into ASCENT for supply commitment tracking"]},
-
-  {color:"#22c55e",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-   phase:"Launch",num:"04",title:"Sequencing Readiness",
-   desc:"For sequence-out suppliers, validate assembly line setup, material flow, labeling, error proofing, IT infrastructure, and complete VSM sign-off before production.",
-   tags:["VSM Sign-off","Assembly Line","Error Proofing","IT Infrastructure"],
-   kpis:[{v:"VSM",l:"Sign-off required"},{v:"Seq-out",l:"All commodities"},{v:"MP&L",l:"Plant-aligned"}],
-   details:["Validate sequencing supplier readiness per MP&L standards","Review assembly line setup, material flow, manpower, and labeling","Confirm IT infrastructure and error-proofing systems are operational","Obtain VSM sign-off from Supplier and all internal MP&L stakeholders"]},
+  {color:"#22c55e",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+   phase:"Pre-Launch",num:"03",title:"Readiness Verification",
+   desc:"Final confirmation of production capability — verifying real-world capacity, manpower headcount, and sequencing infrastructure before the line officially starts.",
+   tags:["Ramp-Up Survey","Sequencing Readiness","VSM Sign-off","ASCENT Commitment"],
+   kpis:[{v:"Onsite",l:"Verification"},{v:"ASCENT",l:"Commitment locked"},{v:"VSM",l:"Signed-off"}],
+   details:[
+     "Complete Ramp-Up Survey covering raw materials, manpower, and production capacity",
+     "Validate sequencing readiness for sequence-out commodity suppliers",
+     "Obtain VSM Sign-off jointly with Ford plant stakeholders",
+     "Confirm supply commitment entry in ASCENT system",
+     "Engineer advantage: real-time NGVAS and GCP container data enables visual material flow analysis"
+   ],
+   insight:"Using live data from NGVAS and GCP systems, you can build a real-time picture of container positions and material flow — giving you ground truth that verbal status updates can't match."
+  },
 
   {color:"#f59e0b",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
-   phase:"In-Production",num:"05",title:"Supplier Performance Monitoring",
-   desc:"Track delivery KPIs weekly, push delinquent suppliers toward 90+ 6MWA, and monitor MCRP plant metrics including ASN accuracy and CUM/SDR statuses.",
-   tags:["6MWA KPI","MCRP Metrics","Weekly Night Letter","CFT Escalation"],
-   kpis:[{v:"81→90+",l:"6MWA target"},{v:"Weekly",l:"Night letter"},{v:"MCRP",l:"Plant metrics"}],
-   details:["Drive suppliers below 81 6MWA up to 81+ and then to 90+","Monitor MCRP metrics: mASN, CUM, SDR, Negatives, ASN Purge","Work with CFT (Purchasing / STA) to improve Supplier OI","Publish weekly night letters and represent SMRT in launch forums"]},
+   phase:"In-Production",num:"04",title:"Performance Monitoring",
+   desc:"Ongoing in-production oversight to protect line stability. Track supplier delivery KPIs, push delinquent suppliers upward, and surface risk trends before they become disruptions.",
+   tags:["6MWA Target 90+","MCRP Metrics","ASN Purge Resolution","Weekly Analysis"],
+   kpis:[{v:"81→90+",l:"6MWA push"},{v:"Weekly",l:"Night letter"},{v:"MCRP",l:"Plant metrics"}],
+   details:[
+     "Drive 6MWA scores from below-81 to 81+ and onward to 90+ target",
+     "Monitor MCRP plant metrics: mASN accuracy, CUM/SDR status, ASN Purge issues",
+     "Identify and resolve ASN Purge errors in supplier systems",
+     "Analyze weekly delivery trends to flag emerging supply risks early",
+     "Engineer advantage: Power BI dashboards built during Ford internship can be extended to model supplier risk prediction"
+   ],
+   insight:"This is exactly where your Ford internship Power BI experience pays off — you can build dashboards that don't just display 6MWA scores, but trend supplier risk and predict delinquency before it reaches the plant floor."
+  },
 
   {color:"#ef4444",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
-   phase:"Crisis",num:"06",title:"Critical Supplier Management",
-   desc:"When a supplier risks production loss, perform deep data analysis, conduct onsite ERP reviews, station at site until resolved, and report to management daily.",
-   tags:["Root Cause Analysis","Onsite Stationed","Daily Reporting","ERP Deep Dive"],
-   kpis:[{v:"Every day",l:"Management report"},{v:"Onsite",l:"Until resolved"},{v:"Multi-source",l:"Data inputs"}],
-   details:["Analyze Daily Production Report, SuperG, Premium freight to identify critical suppliers","Request detailed root cause + action plan with target dates","Review ERP / MRP / MPS and stock integrity across pipeline, in-plant, WIP","Remain stationed at supplier site until system and physical issues are resolved"]},
-
-  {color:"#7c3aed",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-   phase:"Downstream",num:"07",title:"MMOG / Q1 Endorsement",
-   desc:"Conduct feasibility audits, validate EDI/ERP/WMS systems onsite, develop gap-closure timing plans, and endorse supplier for MMOG Level A — Ford's global quality standard.",
-   tags:["MMOG Level A","Q1 Certification","Feasibility Audit","EDI/ERP Validation"],
-   kpis:[{v:"Level A",l:"MMOG target"},{v:"Annual",l:"Endorsement"},{v:"Global",l:"IMG standard"}],
-   details:["Coach new suppliers on MMOG requirements from day one","Perform feasibility audit onsite/offsite to identify all Level A gaps","Validate EDI, ERP, MRP, MPS, WMS, Tier-2 EDI, and Barcode systems","Develop and track timing plan to close all gaps before endorsement deadline","Act as SPOC for all IMG-region suppliers on MMOG and delivery performance"]}
+   phase:"Crisis",num:"05",title:"Crisis & Quality Management",
+   desc:"Activated when a supplier risks production loss. Deep ERP investigation, onsite station, daily management reporting — and long-term MMOG Level A quality endorsement.",
+   tags:["Root Cause Analysis","ERP Deep Dive","Onsite Stationed","MMOG Level A"],
+   kpis:[{v:"Daily",l:"Management report"},{v:"Onsite",l:"Until resolved"},{v:"Level A",l:"MMOG target"}],
+   details:[
+     "Activate when supplier poses imminent risk of production loss — station onsite until resolved",
+     "Perform system-level Root Cause Analysis across ERP, MRP, MPS, and physical stock",
+     "Review stock integrity across pipeline, in-plant WIP, and finished goods",
+     "Coordinate crisis team spanning Purchasing, STA, and Plant operations",
+     "Conduct MMOG Level A feasibility audits — validate EDI, ERP, WMS, Tier-2 EDI, and barcode systems",
+     "Engineer advantage: ability to query and verify stock data integrity directly inside ERP databases"
+   ],
+   insight:"Your ability to trace stock discrepancies inside an ERP database — comparing system records to physical counts — enables you to isolate root causes far faster than analysts without a systems background."
+  }
 ]
 
 const flow=document.getElementById("flow")
@@ -506,6 +540,10 @@ stages.forEach((s,i)=>{
       <div class="expand-inner">
         <div class="kpis">${kpiHtml}</div>
         <ul class="detail-list">${detailHtml}</ul>
+        <div class="insight-box" style="border-left:3px solid ${s.color}">
+          <div class="insight-label">⚡ Engineer's Competitive Advantage</div>
+          <div class="insight-text">${s.insight}</div>
+        </div>
       </div>
     </div>
   </div>`
